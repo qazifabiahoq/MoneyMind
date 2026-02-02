@@ -444,7 +444,7 @@ st.markdown("""
 <div class="main-header">
     <h1 class="app-title">MoneyMind Pro</h1>
     <p class="app-subtitle">Machine Learning Edition</p>
-    <p class="app-tagline">Smart Money, Smarter You - Powered by Real ML</p>
+    <p class="app-tagline">Smart Money, Smarter You</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -974,7 +974,7 @@ st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: var(--text-light); font-size: 0.875rem;">
     <p><strong>MoneyMind Pro</strong> - ML-Powered Financial Analysis</p>
-    <p>Built for CJCP Hacks 25-26 | 100% Free & Open Source</p>
+    <p>Professional Machine Learning Edition | 100% Free & Open Source</p>
     <p><em>RandomForest · Isolation Forest · K-Means · Feature Engineering · scikit-learn</em></p>
 </div>
 """, unsafe_allow_html=True)
