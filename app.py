@@ -52,6 +52,10 @@ st.markdown("""
         --shadow-lg: 0 8px 24px rgba(9, 30, 66, 0.12);
     }
     
+    html {
+        scroll-behavior: smooth;
+    }
+    
     * {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
@@ -128,12 +132,15 @@ st.markdown("""
         opacity: 1;
     }
     
-    /* Tabs - Professional Banking Style */
+    /* Tabs - Professional Banking Style - STICKY */
     .stTabs {
         background: var(--bg-white);
         border-radius: 8px 8px 0 0;
         margin-top: 1rem;
         box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 999;
     }
     
     .stTabs [data-baseweb="tab-list"] {
@@ -553,6 +560,8 @@ st.markdown("""
 # Initialize Session State
 if 'analysis_complete' not in st.session_state:
     st.session_state.analysis_complete = False
+if 'active_tab' not in st.session_state:
+    st.session_state.active_tab = 0  # 0=Upload, 1=Dashboard, 2=Forecast, 3=Alerts, 4=Assistant
 
 # ML Engine Class
 class FinancialIntelligence:
@@ -963,35 +972,96 @@ with tab1:
         
         # Analyze Button
         st.markdown("---")
-        if st.button("Analyze My Spending", use_container_width=True):
-            with st.spinner("Analyzing your financial data..."):
-                # Process data
-                df_processed = FinancialIntelligence.process_data(uploaded_data)
-                st.session_state['data'] = df_processed
-                
-                # Build forecast
-                model, metrics, features = FinancialIntelligence.build_forecast_model(df_processed)
-                st.session_state['forecast_model'] = model
-                st.session_state['forecast_metrics'] = metrics
-                st.session_state['forecast_features'] = features
-                
-                # Detect anomalies
-                df_processed = FinancialIntelligence.detect_unusual_activity(df_processed)
-                st.session_state['data'] = df_processed
-                
-                # Find patterns
-                df_processed, pattern_summary = FinancialIntelligence.discover_patterns(df_processed)
-                st.session_state['data'] = df_processed
-                st.session_state['patterns'] = pattern_summary
-                
-                # Calculate wellness
-                wellness = FinancialIntelligence.calculate_health_score(df_processed)
-                st.session_state['wellness'] = wellness
-                
-                st.session_state.analysis_complete = True
-                
-                st.success("Analysis complete! View your insights in the Dashboard tab.")
-                st.rerun()
+        
+        # Show different button based on state
+        if st.session_state.analysis_complete:
+            col1, col2 = st.columns([2, 1])
+            with col1:
+                st.markdown("""
+                <div style="background: #E6F9F0; padding: 1rem; border-radius: 8px; border-left: 3px solid #00C389;">
+                    <p style="color: #00613D; margin: 0; font-weight: 600;">
+                    ✅ Analysis complete! Click <strong>Dashboard</strong> tab above to view results.
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+            with col2:
+                if st.button("🔄 Analyze Again", use_container_width=True):
+                    # Re-run analysis with existing data
+                    with st.spinner("Re-analyzing your financial data..."):
+                        df_processed = FinancialIntelligence.process_data(uploaded_data)
+                        st.session_state['data'] = df_processed
+                        
+                        model, metrics, features = FinancialIntelligence.build_forecast_model(df_processed)
+                        st.session_state['forecast_model'] = model
+                        st.session_state['forecast_metrics'] = metrics
+                        st.session_state['forecast_features'] = features
+                        
+                        df_processed = FinancialIntelligence.detect_unusual_activity(df_processed)
+                        st.session_state['data'] = df_processed
+                        
+                        df_processed, pattern_summary = FinancialIntelligence.discover_patterns(df_processed)
+                        st.session_state['data'] = df_processed
+                        st.session_state['patterns'] = pattern_summary
+                        
+                        wellness = FinancialIntelligence.calculate_health_score(df_processed)
+                        st.session_state['wellness'] = wellness
+                        
+                        st.success("Analysis updated!")
+        else:
+        else:
+            if st.button("Analyze My Spending", use_container_width=True):
+                with st.spinner("Analyzing your financial data..."):
+                    # Process data
+                    df_processed = FinancialIntelligence.process_data(uploaded_data)
+                    st.session_state['data'] = df_processed
+                    
+                    # Build forecast
+                    model, metrics, features = FinancialIntelligence.build_forecast_model(df_processed)
+                    st.session_state['forecast_model'] = model
+                    st.session_state['forecast_metrics'] = metrics
+                    st.session_state['forecast_features'] = features
+                    
+                    # Detect anomalies
+                    df_processed = FinancialIntelligence.detect_unusual_activity(df_processed)
+                    st.session_state['data'] = df_processed
+                    
+                    # Find patterns
+                    df_processed, pattern_summary = FinancialIntelligence.discover_patterns(df_processed)
+                    st.session_state['data'] = df_processed
+                    st.session_state['patterns'] = pattern_summary
+                    
+                    # Calculate wellness
+                    wellness = FinancialIntelligence.calculate_health_score(df_processed)
+                    st.session_state['wellness'] = wellness
+                    
+                    st.session_state.analysis_complete = True
+                    
+                    st.success("✅ Analysis complete!")
+                    
+                    st.markdown("""
+                    <div style="background: linear-gradient(135deg, #00C389 0%, #00A876 100%); 
+                                color: white; 
+                                padding: 2rem; 
+                                border-radius: 12px; 
+                                text-align: center;
+                                margin: 1.5rem 0;
+                                box-shadow: 0 4px 12px rgba(0, 195, 137, 0.3);">
+                        <h2 style="color: white; margin: 0 0 1rem 0; font-size: 1.75rem;">🎉 Your Financial Analysis is Ready!</h2>
+                        <p style="color: white; font-size: 1.1rem; margin: 0 0 1.5rem 0; opacity: 0.95;">
+                            Click the <strong>Dashboard</strong> tab above to see your complete financial insights
+                        </p>
+                        <div style="background: rgba(255,255,255,0.2); 
+                                    padding: 1rem; 
+                                    border-radius: 8px;
+                                    border: 2px solid rgba(255,255,255,0.3);">
+                            <p style="color: white; margin: 0; font-size: 0.95rem;">
+                                ⬆️ <strong>Look up - click "Dashboard" to view your results</strong> ⬆️
+                            </p>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    st.rerun()
     
     else:
         st.markdown("""
@@ -1015,6 +1085,23 @@ with tab2:
     
     if st.session_state.analysis_complete:
         df = st.session_state.get('data')
+        
+        # Show welcome message if just analyzed
+        if 'dashboard_viewed' not in st.session_state:
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, #E6F2FF 0%, #D6EBFF 100%); 
+                        padding: 1.5rem; 
+                        border-radius: 12px; 
+                        border-left: 4px solid #0066CC;
+                        margin-bottom: 2rem;">
+                <h4 style="color: #003D82; margin: 0 0 0.5rem 0;">👋 Welcome to Your Dashboard!</h4>
+                <p style="color: #1A1A1A; margin: 0; font-size: 0.95rem;">
+                    Here's your complete financial overview. Scroll down to explore:
+                    <strong>Forecast</strong>, <strong>Alerts</strong>, and <strong>AI Assistant</strong> tabs for deeper insights.
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            st.session_state.dashboard_viewed = True
         
         # Overview Metrics
         st.markdown("#### Your Financial Overview")
