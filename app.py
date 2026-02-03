@@ -951,6 +951,14 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<div style="text-align: center; margin: -1rem 0 2rem 0; padding: 0 1rem;">
+    <p style="color: var(--text-dark); font-size: 1.15rem; font-weight: 500; margin: 0; line-height: 1.6;">
+        Upload your transactions and instantly see your spending patterns, forecast, and unusual activity—all in one place.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
 # Main Tabs
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Upload", 
