@@ -71,10 +71,10 @@ st.markdown("""
     
     /* Header */
     .main-header {
-        background: linear-gradient(135deg, #002855 0%, #003D82 50%, #0052A3 100%);
-        padding: 4rem 2rem 3.5rem 2rem;
+        background: linear-gradient(135deg, #001B3D 0%, #003D82 40%, #0052A3 70%, #0066CC 100%);
+        padding: 5rem 2rem 4rem 2rem;
         margin: -6rem -5rem 3rem -5rem;
-        box-shadow: var(--shadow-lg);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         position: relative;
         overflow: hidden;
     }
@@ -82,51 +82,50 @@ st.markdown("""
     .main-header::before {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image: 
-            radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-            radial-gradient(circle at 40% 20%, rgba(0, 195, 137, 0.1) 0%, transparent 50%);
-        background-size: cover;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+        border-radius: 50%;
     }
     
     .main-header::after {
         content: "";
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 100px;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><path d="M0,50 Q300,20 600,50 T1200,50 L1200,100 L0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-        background-size: cover;
+        bottom: -30%;
+        left: -10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(0, 195, 137, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
     }
     
     .header-content {
         position: relative;
-        z-index: 1;
+        z-index: 10;
+        text-align: center;
     }
     
     .app-title {
-        font-size: 3.5rem;
+        font-size: 4.5rem;
         font-weight: 900;
         color: #FFFFFF !important;
         margin: 0;
-        letter-spacing: 2px;
-        text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+        letter-spacing: 4px;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 4px 20px rgba(0, 0, 0, 0.4);
         text-transform: uppercase;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
     }
     
     .app-tagline {
-        font-size: 1.35rem;
+        font-size: 1.5rem;
         color: #FFFFFF !important;
-        margin-top: 1rem;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        opacity: 0.95;
+        margin-top: 1.25rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
+        opacity: 1;
     }
     
     /* Tabs - Professional Banking Style */
@@ -204,13 +203,34 @@ st.markdown("""
     /* Make all labels more visible */
     label {
         color: var(--text-dark) !important;
-        font-weight: 600;
+        font-weight: 600 !important;
+        font-size: 0.95rem !important;
     }
     
     /* Improve radio button labels */
     .stRadio label {
         color: var(--text-dark) !important;
-        font-weight: 600;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+    }
+    
+    .stRadio > div {
+        color: var(--text-dark) !important;
+    }
+    
+    .stRadio > label {
+        color: var(--text-dark) !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+    }
+    
+    /* Text inputs and areas */
+    .stTextInput label,
+    .stTextArea label,
+    .stSelectbox label {
+        color: var(--text-dark) !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
     }
     
     /* Cards */
@@ -263,27 +283,43 @@ st.markdown("""
         font-weight: 500;
     }
     
-    /* Buttons */
+    /* Buttons - MAXIMUM CONTRAST */
     .stButton > button {
-        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%) !important;
         color: #FFFFFF !important;
-        border: none;
+        border: none !important;
         border-radius: 8px;
         padding: 1rem 2.5rem;
-        font-size: 1.05rem;
-        font-weight: 700;
+        font-size: 1.1rem !important;
+        font-weight: 900 !important;
         cursor: pointer;
         transition: all 0.3s ease;
         width: 100%;
         height: 56px;
         box-shadow: 0 4px 12px rgba(0, 61, 130, 0.25);
-        letter-spacing: 0.5px;
+        letter-spacing: 0.8px;
+    }
+    
+    .stButton > button *,
+    .stButton > button p,
+    .stButton > button span,
+    .stButton > button div {
+        color: #FFFFFF !important;
+        font-weight: 900 !important;
     }
     
     .stButton > button:hover {
-        background: linear-gradient(135deg, #0052A3 0%, #0077E6 100%);
+        background: linear-gradient(135deg, #0052A3 0%, #0077E6 100%) !important;
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(0, 61, 130, 0.35);
+        color: #FFFFFF !important;
+    }
+    
+    .stButton > button:hover *,
+    .stButton > button:hover p,
+    .stButton > button:hover span,
+    .stButton > button:hover div {
+        color: #FFFFFF !important;
     }
     
     .stButton > button:active {
@@ -312,9 +348,17 @@ st.markdown("""
     
     [data-testid="stFileUploader"] button {
         background: var(--primary-blue) !important;
-        color: white !important;
+        color: #FFFFFF !important;
         border-radius: 6px;
-        font-weight: 600;
+        font-weight: 700 !important;
+    }
+    
+    [data-testid="stFileUploader"] label,
+    [data-testid="stFileUploader"] p,
+    [data-testid="stFileUploader"] span,
+    [data-testid="stFileUploader"] div {
+        color: var(--text-dark) !important;
+        font-weight: 600 !important;
     }
     
     /* Info Boxes */
@@ -339,51 +383,108 @@ st.markdown("""
     
     /* Success/Warning/Info Messages */
     .stSuccess, .stInfo, .stWarning, .stError {
-        border-radius: 8px;
-        padding: 1rem 1.5rem;
-        font-weight: 600;
-        font-size: 0.95rem;
+        border-radius: 8px !important;
+        padding: 1rem 1.5rem !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
     }
     
     .stSuccess {
-        background: linear-gradient(135deg, #E6F9F0 0%, #D1F4E0 100%);
-        border-left: 4px solid var(--success-green);
+        background: linear-gradient(135deg, #E6F9F0 0%, #D1F4E0 100%) !important;
+        border-left: 4px solid var(--success-green) !important;
         color: #00613D !important;
     }
     
+    .stSuccess p, .stSuccess div, .stSuccess span {
+        color: #00613D !important;
+        font-weight: 600 !important;
+    }
+    
     .stInfo {
-        background: linear-gradient(135deg, #E6F2FF 0%, #D6EBFF 100%);
-        border-left: 4px solid var(--accent-blue);
-        color: #003D82 !important;
+        background: linear-gradient(135deg, #E6F2FF 0%, #D6EBFF 100%) !important;
+        border-left: 4px solid var(--accent-blue) !important;
+        color: #002855 !important;
+    }
+    
+    .stInfo p, .stInfo div, .stInfo span {
+        color: #002855 !important;
+        font-weight: 600 !important;
     }
     
     .stWarning {
-        background: linear-gradient(135deg, #FFF4E6 0%, #FFE8CC 100%);
-        border-left: 4px solid #FF991F;
+        background: linear-gradient(135deg, #FFF4E6 0%, #FFE8CC 100%) !important;
+        border-left: 4px solid #FF991F !important;
         color: #663C00 !important;
     }
     
+    .stWarning p, .stWarning div, .stWarning span {
+        color: #663C00 !important;
+        font-weight: 600 !important;
+    }
+    
     .stError {
-        background: linear-gradient(135deg, #FFE6E6 0%, #FFD6D6 100%);
-        border-left: 4px solid #FF5630;
+        background: linear-gradient(135deg, #FFE6E6 0%, #FFD6D6 100%) !important;
+        border-left: 4px solid #FF5630 !important;
         color: #6B0000 !important;
     }
     
-    /* Input Fields */
+    .stError p, .stError div, .stError span {
+        color: #6B0000 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Input Fields - MAXIMUM CONTRAST */
     .stTextInput input,
-    .stTextArea textarea {
-        background: var(--bg-white);
-        border: 2px solid var(--border);
-        border-radius: 8px;
-        padding: 0.875rem 1rem;
-        font-size: 0.95rem;
+    .stTextArea textarea,
+    .stSelectbox select,
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea {
+        background: var(--bg-white) !important;
+        border: 2px solid var(--border) !important;
+        border-radius: 8px !important;
+        padding: 0.875rem 1rem !important;
+        font-size: 1rem !important;
         transition: all 0.2s ease;
+        color: #1A1A1A !important;
+        font-weight: 500 !important;
+    }
+    
+    .stTextInput input::placeholder,
+    .stTextArea textarea::placeholder,
+    input::placeholder,
+    textarea::placeholder {
+        color: #8993A4 !important;
+        font-weight: 400 !important;
     }
     
     .stTextInput input:focus,
-    .stTextArea textarea:focus {
-        border-color: var(--primary-blue);
-        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+    .stTextArea textarea:focus,
+    input:focus,
+    textarea:focus {
+        border-color: var(--primary-blue) !important;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1) !important;
+        color: #1A1A1A !important;
+    }
+    
+    /* Force input text to be dark - AGGRESSIVE */
+    input[class*="st-"],
+    textarea[class*="st-"],
+    .stTextInput input,
+    .stTextArea textarea,
+    div[data-baseweb="input"] input {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+    }
+    
+    .stTextInput div[data-baseweb="input"] {
+        background: white !important;
+    }
+    
+    .stTextInput div[data-baseweb="input"] input {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
     }
     
     /* Data Tables */
@@ -391,6 +492,26 @@ st.markdown("""
         border: 1px solid var(--border);
         border-radius: 8px;
         overflow: hidden;
+    }
+    
+    /* Expander */
+    .streamlit-expanderHeader {
+        background: var(--bg-white);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-weight: 600;
+        color: var(--text-dark) !important;
+    }
+    
+    .streamlit-expanderHeader:hover {
+        background: var(--light-blue);
+    }
+    
+    .streamlit-expanderContent {
+        background: var(--bg-white);
+        border: 1px solid var(--border);
+        border-top: none;
+        border-radius: 0 0 8px 8px;
     }
     
     /* Footer */
@@ -699,15 +820,51 @@ with tab1:
     
     upload_method = st.radio(
         "Choose upload method:",
-        ["CSV File", "Receipt/Screenshot" + (" (OCR Available)" if HAS_OCR else " (Install pytesseract)")],
+        ["Spreadsheet (CSV)", "Photo of Receipt"],
         horizontal=True
     )
     
-    st.info("💡 **Don't have data?** Download sample_transactions.csv or sample_receipt.txt from the GitHub repo to test!")
+    # Sample data downloads
+    st.markdown("---")
+    
+    with st.expander("📥 **Need sample data to test?** Click here"):
+        st.markdown("**Download sample transaction data to try Prism:**")
+        
+        sample_csv = """Date,Amount,Description
+2024-01-01,45.50,Starbucks Coffee
+2024-01-02,120.00,Grocery Store - Walmart
+2024-01-03,15.00,Uber Ride Downtown
+2024-01-05,1200.00,Rent Payment
+2024-01-08,89.99,Amazon Shopping
+2024-01-10,150.00,Electric Utility Bill
+2024-01-15,58.23,Walmart Grocery
+2024-01-22,120.00,Verizon Phone Bill
+2024-01-25,75.00,24 Hour Fitness Gym
+2024-02-01,250.00,Health Insurance
+2024-02-05,85.00,Target Shopping
+2024-02-10,55.00,Restaurant Dinner
+2024-02-15,1200.00,Rent Payment
+2024-02-20,90.00,Gas Station"""
+        
+        st.download_button(
+            label="💾 Download Sample Transactions (CSV)",
+            data=sample_csv,
+            file_name="prism_sample_transactions.csv",
+            mime="text/csv",
+            use_container_width=True
+        )
+        
+        st.markdown("""
+        <div style="padding: 1rem; margin-top: 1rem; background: #F0F7FF; border-radius: 6px;">
+        <small><strong>How to use:</strong> Download the file, then upload it above using "Spreadsheet (CSV)" option</small>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("---")
     
     uploaded_data = None
     
-    if upload_method == "CSV File":
+    if upload_method == "Spreadsheet (CSV)":
         uploaded_file = st.file_uploader(
             "Upload your transaction history (CSV)",
             type=['csv'],
@@ -721,21 +878,36 @@ with tab1:
     else:
         if HAS_OCR:
             uploaded_image = st.file_uploader(
-                "Upload receipt or transaction screenshot",
-                type=['png', 'jpg', 'jpeg', 'pdf'],
-                help="We'll extract transaction details automatically"
+                "Upload a photo of your receipt",
+                type=['png', 'jpg', 'jpeg'],
+                help="Take a clear photo of your receipt - we'll extract the transactions"
             )
             
             if uploaded_image:
-                with st.spinner("Extracting transaction data..."):
+                with st.spinner("Reading your receipt..."):
                     uploaded_data = FinancialIntelligence.extract_from_image(uploaded_image)
                     
                     if uploaded_data is not None:
-                        st.success("Transactions extracted successfully")
+                        st.success("Receipt processed successfully!")
                     else:
-                        st.error("Could not extract transactions. Please try a clearer image or use CSV.")
+                        st.warning("""
+                        **Couldn't read this receipt**
+                        
+                        For best results:
+                        - Make sure the photo is clear and well-lit
+                        - Receipt should be flat (not crumpled)
+                        - All text should be visible
+                        
+                        Or try uploading a spreadsheet (CSV) instead - it's faster and more reliable!
+                        """)
         else:
-            st.warning("Install pytesseract and PIL for receipt scanning: `pip install pytesseract pillow`")
+            st.info("""
+            **Photo Upload Feature**
+            
+            Receipt scanning is currently being set up.
+            
+            Please use spreadsheet (CSV) upload - it's fast and works perfectly!
+            """)
     
     if uploaded_data is not None:
         st.session_state['raw_data'] = uploaded_data
@@ -1083,6 +1255,7 @@ with tab4:
 # TAB 5: ASSISTANT
 with tab5:
     st.markdown("### Financial Assistant")
+    st.markdown("*Powered by Advanced AI (Llama 3.3 70B)*")
     
     if HAS_GROQ:
         try:
@@ -1091,11 +1264,14 @@ with tab5:
             if st.session_state.analysis_complete and groq_key:
                 df = st.session_state.get('data')
                 
-                st.markdown("Ask me anything about your spending patterns and financial health.")
+                st.markdown("""
+                Ask personalized questions about your spending and get AI-powered financial advice based on your actual data.
+                """)
                 
                 question = st.text_input(
-                    "Your question:",
-                    placeholder="e.g., What can I do to improve my financial health?"
+                    "Ask me anything about your finances:",
+                    placeholder="Example: How can I reduce my spending? What's my biggest expense category?",
+                    key="ai_question"
                 )
                 
                 if question:
@@ -1108,40 +1284,56 @@ User's financial data summary:
 - Average spending: ${df['amount'].mean():.2f}
 - Wellness score: {st.session_state.get('wellness', {}).get('score', 0)}/100
 - Unusual transactions: {df['is_anomaly'].sum() if 'is_anomaly' in df.columns else 0}
-- Top category: {df['category'].mode()[0] if 'category' in df.columns else 'Unknown'}
+- Top spending category: {df['category'].mode()[0] if 'category' in df.columns else 'Unknown'}
 
 User question: {question}
 
-Provide helpful, actionable financial advice in a friendly tone.
+Provide helpful, actionable financial advice in a friendly, professional tone. Be specific and data-driven.
 """
                     
-                    with st.spinner("Thinking..."):
+                    with st.spinner("Generating personalized advice..."):
                         completion = client.chat.completions.create(
                             model="llama-3.3-70b-versatile",
                             messages=[{"role": "user", "content": context}],
-                            max_tokens=500
+                            max_tokens=500,
+                            temperature=0.7
                         )
                         
                         answer = completion.choices[0].message.content
                         
                         st.markdown(f"""
                         <div class="info-card">
-                            <h4>Response</h4>
+                            <h4>AI Financial Advisor</h4>
                             <p>{answer}</p>
                         </div>
                         """, unsafe_allow_html=True)
             
             elif not groq_key:
-                st.warning("Assistant requires Groq API key. Add it to Streamlit secrets to enable.")
+                st.info("""
+                **💡 AI Assistant - Generative AI Powered**
+                
+                This feature uses **Llama 3.3 70B** (state-of-the-art large language model) to provide:
+                - Personalized financial advice based on YOUR data
+                - Spending optimization recommendations  
+                - Budget planning assistance
+                - Financial health improvement tips
+                
+                **Currently being configured for deployment.** All core analysis features work perfectly!
+                """)
             else:
-                st.info("Analyze your transactions first to use the Assistant")
+                st.info("Analyze your transactions first to unlock AI-powered advice")
         
         except Exception as e:
-            st.error(f"Error: {str(e)}")
+            st.error(f"Assistant error: {str(e)}")
     
     else:
-        st.warning("Install Groq library for AI assistant: `pip install groq`")
-        st.info("The Assistant is optional - all analysis features work without it")
+        st.info("""
+        **💡 AI Financial Assistant**
+        
+        Get personalized advice powered by advanced generative AI (Llama 3.3 70B).
+        
+        This feature is being configured. All core analysis features work perfectly!
+        """)
 
 # Footer
 st.markdown("""
