@@ -1,4 +1,4 @@
-# 💎 Prism
+# Prism
 
 **Your Financial Truth**
 
@@ -193,7 +193,7 @@ Single interpretable number tracking financial stability improvement over time.
 
 **Time Savings:**
 - Traditional budgeting: **4-6 hours/month** manual spreadsheet work
-- MoneyMind Pro: **<30 seconds** from upload to full analysis
+- Prism: **<30 seconds** from upload to full analysis
 - Automated insights eliminate financial research burden
 
 ### **Market Differentiation**
@@ -243,7 +243,7 @@ Single interpretable number tracking financial stability improvement over time.
 - Average user reduces high-interest debt by **$500-1,000** in first 6 months
 
 **Mental Health Connection:**  
-Financial stress is **#1 cause of adult anxiety**. MoneyMind Pro reduces stress through:
+Financial stress is **#1 cause of adult anxiety**. Prism reduces stress through:
 - **Predictability**: Forecasting eliminates surprise expenses
 - **Control**: Data-driven insights vs financial helplessness
 - **Confidence**: Quantified improvement tracking
@@ -322,7 +322,7 @@ Financial stress is **#1 cause of adult anxiety**. MoneyMind Pro reduces stress 
 
 **Academic Foundation:**
 
-MoneyMind Pro implements established quantitative finance methodologies:
+Prism implements established quantitative finance methodologies:
 - Time series analysis (ARIMA principles)
 - Ensemble learning (Breiman, 2001)
 - Anomaly detection (Liu et al., 2008)
@@ -351,6 +351,9 @@ MoneyMind Pro implements established quantitative finance methodologies:
 
 **Inspired By:**  
 Real-world financial literacy challenges facing 78% of Americans living paycheck-to-paycheck.
+
+**Built For:**  
+TechThrive March 2026 Hackathon
 
 ---
 
