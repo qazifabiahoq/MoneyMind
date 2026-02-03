@@ -64,6 +64,49 @@ st.markdown("""
         background: var(--bg-light);
     }
     
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .app-title {
+            font-size: 2.5rem !important;
+            letter-spacing: 2px !important;
+        }
+        
+        .app-tagline {
+            font-size: 1rem !important;
+        }
+        
+        .main-header {
+            padding: 3rem 1rem 2.5rem 1rem !important;
+        }
+        
+        .metric-card {
+            padding: 1.5rem 1rem !important;
+        }
+        
+        .metric-value {
+            font-size: 2rem !important;
+        }
+        
+        .stTabs [data-baseweb="tab"] {
+            padding: 0 1rem !important;
+            font-size: 0.85rem !important;
+        }
+        
+        [data-testid="stFileUploader"] {
+            padding: 2rem 1rem !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .app-title {
+            font-size: 2rem !important;
+        }
+        
+        .metric-value {
+            font-size: 1.75rem !important;
+        }
+    }
+    
     /* Hide Streamlit Branding */
     #MainMenu, footer, header {visibility: hidden;}
     
@@ -235,6 +278,18 @@ st.markdown("""
         font-size: 1rem !important;
     }
     
+    /* Mobile touch-friendly radio buttons */
+    @media (max-width: 768px) {
+        .stRadio label {
+            font-size: 0.95rem !important;
+            padding: 0.5rem;
+        }
+        
+        .stRadio [role="radiogroup"] {
+            gap: 0.5rem;
+        }
+    }
+    
     /* Text inputs and areas */
     .stTextInput label,
     .stTextArea label,
@@ -242,6 +297,14 @@ st.markdown("""
         color: var(--text-dark) !important;
         font-weight: 700 !important;
         font-size: 1rem !important;
+    }
+    
+    @media (max-width: 768px) {
+        .stTextInput label,
+        .stTextArea label,
+        .stSelectbox label {
+            font-size: 0.9rem !important;
+        }
     }
     
     /* Cards */
@@ -311,6 +374,14 @@ st.markdown("""
         letter-spacing: 0.8px;
     }
     
+    @media (max-width: 768px) {
+        .stButton > button {
+            padding: 0.875rem 1.5rem;
+            font-size: 1rem !important;
+            height: 50px;
+        }
+    }
+    
     .stButton > button *,
     .stButton > button p,
     .stButton > button span,
@@ -344,6 +415,14 @@ st.markdown("""
         border-radius: 12px;
         padding: 3rem 2rem;
         transition: all 0.3s ease;
+        min-height: 150px;
+    }
+    
+    @media (max-width: 768px) {
+        [data-testid="stFileUploader"] {
+            padding: 2rem 1rem;
+            min-height: 120px;
+        }
     }
     
     [data-testid="stFileUploader"]:hover {
@@ -363,6 +442,14 @@ st.markdown("""
         color: #FFFFFF !important;
         border-radius: 6px;
         font-weight: 700 !important;
+        min-height: 44px;
+    }
+    
+    @media (max-width: 768px) {
+        [data-testid="stFileUploader"] button {
+            min-height: 48px;
+            font-size: 1rem !important;
+        }
     }
     
     [data-testid="stFileUploader"] label,
@@ -474,6 +561,21 @@ st.markdown("""
         transition: all 0.2s ease;
         color: #1A1A1A !important;
         font-weight: 500 !important;
+        min-height: 44px;
+    }
+    
+    @media (max-width: 768px) {
+        .stTextInput input,
+        .stTextArea textarea,
+        .stSelectbox select,
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        textarea {
+            padding: 1rem !important;
+            font-size: 1rem !important;
+            min-height: 48px;
+        }
     }
     
     .stTextInput input::placeholder,
@@ -519,6 +621,18 @@ st.markdown("""
         overflow: hidden;
     }
     
+    @media (max-width: 768px) {
+        .dataframe {
+            font-size: 0.85rem;
+        }
+        
+        /* Make tables horizontally scrollable on mobile */
+        [data-testid="stDataFrame"] {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+    
     /* Expander */
     .streamlit-expanderHeader {
         background: var(--bg-white);
@@ -526,6 +640,14 @@ st.markdown("""
         border-radius: 8px;
         font-weight: 600;
         color: var(--text-dark) !important;
+        min-height: 44px;
+    }
+    
+    @media (max-width: 768px) {
+        .streamlit-expanderHeader {
+            min-height: 48px;
+            font-size: 0.95rem;
+        }
     }
     
     .streamlit-expanderHeader:hover {
@@ -845,17 +967,57 @@ with tab1:
     
     st.markdown("---")
     
-    uploaded_data = None
-    
-    uploaded_file = st.file_uploader(
-        "Upload your transaction history (CSV)",
-        type=['csv'],
-        help="CSV file with Date, Amount, and Description columns"
+    upload_method = st.radio(
+        "Choose upload method:",
+        ["CSV File", "Photo Upload"],
+        horizontal=True,
+        help="CSV for bulk transactions or Photo for single receipts"
     )
     
-    if uploaded_file:
-        uploaded_data = pd.read_csv(uploaded_file)
-        st.success("File uploaded successfully")
+    st.markdown("---")
+    
+    uploaded_data = None
+    
+    if upload_method == "CSV File":
+        uploaded_file = st.file_uploader(
+            "Upload your transaction history (CSV)",
+            type=['csv'],
+            help="CSV file with Date, Amount, and Description columns"
+        )
+        
+        if uploaded_file:
+            uploaded_data = pd.read_csv(uploaded_file)
+            st.success("File uploaded successfully")
+    
+    else:  # Photo Upload
+        uploaded_image = st.file_uploader(
+            "Upload receipt or bank statement photo",
+            type=['png', 'jpg', 'jpeg'],
+            help="Clear photo showing transaction details"
+        )
+        
+        if uploaded_image:
+            with st.spinner("Extracting transactions from photo..."):
+                try:
+                    if HAS_OCR:
+                        uploaded_data = FinancialIntelligence.extract_from_image(uploaded_image)
+                        if uploaded_data is not None and len(uploaded_data) > 0:
+                            st.success(f"Extracted {len(uploaded_data)} transactions from photo!")
+                        else:
+                            st.error("Could not extract transactions. Please ensure photo is clear and contains transaction data, or use CSV upload.")
+                            uploaded_data = None
+                    else:
+                        st.error("""
+                        **OCR Library Not Installed**
+                        
+                        Photo upload requires pytesseract. Please use CSV upload instead.
+                        
+                        For deployment: Add `pytesseract` and `opencv-python-headless` to requirements.txt
+                        """)
+                        uploaded_data = None
+                except Exception as e:
+                    st.error(f"Photo processing error: {str(e)}. Please use CSV upload.")
+                    uploaded_data = None
     
     if uploaded_data is not None:
         st.session_state['raw_data'] = uploaded_data
