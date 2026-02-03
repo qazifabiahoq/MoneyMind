@@ -1008,7 +1008,6 @@ with tab1:
                         
                         st.success("Analysis updated!")
         else:
-        else:
             if st.button("Analyze My Spending", use_container_width=True):
                 with st.spinner("Analyzing your financial data..."):
                     # Process data
