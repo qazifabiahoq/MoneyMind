@@ -337,7 +337,7 @@ st.markdown("""
         transform: translateY(0);
     }
     
-    /* File Uploader */
+    /* File Uploader - MAXIMUM VISIBILITY */
     [data-testid="stFileUploader"] {
         background: linear-gradient(135deg, #F0F7FF 0%, #E6F2FF 100%);
         border: 3px dashed var(--accent-blue);
@@ -367,9 +367,15 @@ st.markdown("""
     [data-testid="stFileUploader"] label,
     [data-testid="stFileUploader"] p,
     [data-testid="stFileUploader"] span,
-    [data-testid="stFileUploader"] div {
-        color: var(--text-dark) !important;
+    [data-testid="stFileUploader"] div,
+    [data-testid="stFileUploader"] small {
+        color: #003D82 !important;
         font-weight: 600 !important;
+    }
+    
+    /* Force file uploader text to be dark blue */
+    [data-testid="stFileUploader"] * {
+        color: #003D82 !important;
     }
     
     /* Info Boxes */
@@ -837,42 +843,6 @@ with tab1:
         horizontal=True
     )
     
-    # Sample data downloads
-    st.markdown("---")
-    
-    with st.expander("Need sample data to test? Click here"):
-        st.markdown("**Download sample transaction data to try Prism:**")
-        
-        sample_csv = """Date,Amount,Description
-2024-01-01,45.50,Starbucks Coffee
-2024-01-02,120.00,Grocery Store - Walmart
-2024-01-03,15.00,Uber Ride Downtown
-2024-01-05,1200.00,Rent Payment
-2024-01-08,89.99,Amazon Shopping
-2024-01-10,150.00,Electric Utility Bill
-2024-01-15,58.23,Walmart Grocery
-2024-01-22,120.00,Verizon Phone Bill
-2024-01-25,75.00,24 Hour Fitness Gym
-2024-02-01,250.00,Health Insurance
-2024-02-05,85.00,Target Shopping
-2024-02-10,55.00,Restaurant Dinner
-2024-02-15,1200.00,Rent Payment
-2024-02-20,90.00,Gas Station"""
-        
-        st.download_button(
-            label="Download Sample Transactions (CSV)",
-            data=sample_csv,
-            file_name="prism_sample_transactions.csv",
-            mime="text/csv",
-            use_container_width=True
-        )
-        
-        st.markdown("""
-        <div style="padding: 1rem; margin-top: 1rem; background: #F0F7FF; border-radius: 6px;">
-        <small><strong>How to use:</strong> Download the file, then upload it above using "Spreadsheet (CSV)" option</small>
-        </div>
-        """, unsafe_allow_html=True)
-    
     st.markdown("---")
     
     uploaded_data = None
@@ -1067,20 +1037,7 @@ with tab1:
                     st.rerun()
     
     else:
-        st.markdown("""
-        <div class="info-card">
-            <h4>What You'll Get</h4>
-            <p><strong>Comprehensive Financial Analysis:</strong></p>
-            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-                <li><strong>Spending Forecast:</strong> See predicted spending for next 7 days</li>
-                <li><strong>Activity Alerts:</strong> Automatic detection of unusual charges</li>
-                <li><strong>Spending Patterns:</strong> Discover your financial habits</li>
-                <li><strong>Wellness Score:</strong> Track your financial health over time</li>
-                <li><strong>Smart Insights:</strong> Personalized recommendations</li>
-            </ul>
-            <p style="margin-top: 1rem;"><em>Analysis completes in under 30 seconds. Your data stays private - we never store it.</em></p>
-        </div>
-        """, unsafe_allow_html=True)
+        pass  # No file uploaded yet
 
 # TAB 2: DASHBOARD
 with tab2:
