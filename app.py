@@ -337,10 +337,10 @@ st.markdown("""
         transform: translateY(0);
     }
     
-    /* File Uploader - MAXIMUM VISIBILITY */
+    /* File Uploader - WHITE BACKGROUND, DARK TEXT */
     [data-testid="stFileUploader"] {
-        background: linear-gradient(135deg, #F0F7FF 0%, #E6F2FF 100%);
-        border: 3px dashed var(--accent-blue);
+        background: #FFFFFF !important;
+        border: 3px dashed var(--accent-blue) !important;
         border-radius: 12px;
         padding: 3rem 2rem;
         transition: all 0.3s ease;
@@ -348,13 +348,14 @@ st.markdown("""
     
     [data-testid="stFileUploader"]:hover {
         border-color: var(--primary-blue);
-        background: linear-gradient(135deg, #E6F2FF 0%, #DBEAFE 100%);
+        background: #F8FBFF !important;
         box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
     }
     
     [data-testid="stFileUploader"] section {
         border: none;
         padding: 1rem;
+        background: transparent !important;
     }
     
     [data-testid="stFileUploader"] button {
@@ -369,13 +370,20 @@ st.markdown("""
     [data-testid="stFileUploader"] span,
     [data-testid="stFileUploader"] div,
     [data-testid="stFileUploader"] small {
-        color: #003D82 !important;
+        color: #1A1A1A !important;
         font-weight: 600 !important;
+        background: transparent !important;
     }
     
-    /* Force file uploader text to be dark blue */
-    [data-testid="stFileUploader"] * {
-        color: #003D82 !important;
+    /* Force ALL file uploader children to have dark text on white */
+    [data-testid="stFileUploader"] *:not(button) {
+        color: #1A1A1A !important;
+        background: transparent !important;
+    }
+    
+    /* File uploader drag area */
+    [data-testid="stFileUploader"] > div {
+        background: #FFFFFF !important;
     }
     
     /* Info Boxes */
@@ -1069,9 +1077,12 @@ with tab2:
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            metrics = st.session_state.get('forecast_metrics', {})
-            r2 = metrics.get('r2', 0)
-            confidence = r2 * 100
+            metrics = st.session_state.get('forecast_metrics')
+            if metrics and isinstance(metrics, dict):
+                r2 = metrics.get('r2', 0)
+                confidence = r2 * 100
+            else:
+                confidence = 0
             st.markdown(f"""
             <div class="metric-card">
                 <div class="metric-label">Forecast Confidence</div>
@@ -1081,9 +1092,13 @@ with tab2:
             """, unsafe_allow_html=True)
         
         with col2:
-            wellness = st.session_state.get('wellness', {})
-            score = wellness.get('score', 0)
-            category = wellness.get('category', 'Unknown')
+            wellness = st.session_state.get('wellness')
+            if wellness and isinstance(wellness, dict):
+                score = wellness.get('score', 0)
+                category = wellness.get('category', 'Unknown')
+            else:
+                score = 0
+                category = 'Unknown'
             st.markdown(f"""
             <div class="metric-card">
                 <div class="metric-label">Financial Wellness</div>
@@ -1325,13 +1340,16 @@ with tab5:
                     client = Groq(api_key=groq_key)
                     
                     # Build context
+                    wellness = st.session_state.get('wellness')
+                    wellness_score = wellness.get('score', 0) if wellness and isinstance(wellness, dict) else 0
+                    
                     context = f"""
 User's financial data summary:
 - Total transactions: {len(df)}
 - Average spending: ${df['amount'].mean():.2f}
-- Wellness score: {st.session_state.get('wellness', {}).get('score', 0)}/100
+- Wellness score: {wellness_score}/100
 - Unusual transactions: {df['is_anomaly'].sum() if 'is_anomaly' in df.columns else 0}
-- Top spending category: {df['category'].mode()[0] if 'category' in df.columns else 'Unknown'}
+- Top spending category: {df['category'].mode()[0] if 'category' in df.columns and len(df['category'].mode()) > 0 else 'Unknown'}
 
 User question: {question}
 
